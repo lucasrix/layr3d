@@ -5,11 +5,11 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '
 
 export const metadata = {
   title: 'layr3d — Custom 3D Printing',
-  description: 'Turn any image into a custom 3D print. Upload your design, choose your material and size, and we handle the rest.',
-  keywords: ['3D printing', 'custom prints', 'PLA', 'PETG', 'TPU', 'layr3d'],
+  description: 'Turn any STL file into a custom 3D print. Upload your file, choose your material and size, and we handle the rest.',
+  keywords: ['3D printing', 'custom prints', 'STL', 'PLA', 'PETG', 'TPU', 'layr3d'],
   openGraph: {
     title: 'layr3d — Custom 3D Printing',
-    description: 'Turn any image into a custom 3D print.',
+    description: 'Turn any STL file into a custom 3D print.',
     type: 'website',
   },
 };

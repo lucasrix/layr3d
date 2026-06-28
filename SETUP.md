@@ -46,17 +46,19 @@ CREATE TABLE orders (
 4. Toggle **Public bucket** ON (so image URLs work without auth)
 5. Click **Save**
 
-Next, set the upload policy so the API can write files:
+Next, set the upload policy so the browser can write files directly (the order form uploads images straight to Storage from the customer's browser, to avoid Vercel's request size limit):
 
 1. Still in Storage, click **Policies** (top right)
 2. Under `order-images`, click **New Policy**
 3. Choose **For full customization**
 4. Set:
-   - **Policy name**: `service-role-upload`
+   - **Policy name**: `public-upload`
    - **Allowed operation**: INSERT
-   - **Target roles**: `service_role`
-   - **USING expression**: `true`
+   - **Target roles**: `anon`
+   - **WITH CHECK expression**: `true`
 5. Click **Review** then **Save policy**
+
+> Note: this lets anyone upload to the `order-images` bucket, which is acceptable for this use case (it's just print images, not sensitive data). If you want to tighten this later, you can restrict file size/type at the bucket level in Supabase.
 
 ---
 

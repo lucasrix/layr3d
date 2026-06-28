@@ -27,7 +27,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
-            Upload any 2D image and we'll turn it into a custom 3D print — exactly to your specs. Any color, any size, any material.
+            Upload an STL file and we'll turn it into a custom 3D print — exactly to your specs. Don't have one yet? Convert any image to .stl with our AI STL Generator. Any color, any size, any material.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">

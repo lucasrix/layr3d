@@ -3,16 +3,19 @@ import { createServerClient } from '@/lib/supabase';
 
 export async function POST(request) {
   try {
-    const formData = await request.formData();
+    const body = await request.json();
 
-    const image = formData.get('image');
-    const customerName = formData.get('customer_name');
-    const customerEmail = formData.get('customer_email');
-    const shippingAddress = formData.get('shipping_address');
-    const material = formData.get('material');
-    const color = formData.get('color');
-    const size = formData.get('size');
-    const price = parseFloat(formData.get('price'));
+    const {
+      customer_name: customerName,
+      customer_email: customerEmail,
+      shipping_address: shippingAddress,
+      material,
+      color,
+      size,
+      price,
+      image_url: imageUrl,
+      image_filename: imageFilename,
+    } = body;
 
     // Validate required fields
     if (!customerName || !customerEmail || !shippingAddress || !material || !color || !size || !price) {
@@ -21,38 +24,8 @@ export async function POST(request) {
 
     const supabase = createServerClient();
 
-    let imageUrl = null;
-    let imageFilename = null;
-
-    // Upload image to Supabase Storage if provided
-    if (image && image.size > 0) {
-      const ext = image.name.split('.').pop();
-      const filename = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
-
-      const arrayBuffer = await image.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('order-images')
-        .upload(filename, buffer, {
-          contentType: image.type,
-          upsert: false,
-        });
-
-      if (uploadError) {
-        console.error('Image upload error:', uploadError);
-        return NextResponse.json({ error: 'Failed to upload image.' }, { status: 500 });
-      }
-
-      const { data: urlData } = supabase.storage
-        .from('order-images')
-        .getPublicUrl(uploadData.path);
-
-      imageUrl = urlData.publicUrl;
-      imageFilename = image.name;
-    }
-
-    // Save order to database
+    // Save order to database. The image was already uploaded directly to
+    // Supabase Storage from the browser, so we just store its public URL here.
     const { data, error } = await supabase
       .from('orders')
       .insert([
@@ -63,9 +36,9 @@ export async function POST(request) {
           material,
           color,
           size,
-          price,
-          image_url: imageUrl,
-          image_filename: imageFilename,
+          price: parseFloat(price),
+          image_url: imageUrl || null,
+          image_filename: imageFilename || null,
           status: 'pending',
         },
       ])

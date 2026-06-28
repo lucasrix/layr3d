@@ -1,8 +1,8 @@
 const steps = [
   {
     number: '01',
-    title: 'Upload Your Image',
-    description: 'Upload any 2D image — a logo, drawing, character, or design. Then choose your color, material, and size.',
+    title: 'Upload Your STL File',
+    description: 'We print from 3D model files (.stl) only. Have a photo or drawing instead? Use a free AI STL Generator to convert any image into a printable .stl first.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -13,8 +13,8 @@ const steps = [
   },
   {
     number: '02',
-    title: 'We Model & Print',
-    description: 'Our technician converts your 2D image into a 3D model, sets up the printer with your chosen material, and prints your design.',
+    title: 'We Prep & Print',
+    description: 'Our technician preps your STL file, sets up the printer with your chosen material, and prints your design.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -42,7 +42,7 @@ export default function HowItWorks() {
         <div className="text-center">
           <h2 className="section-heading">How It Works</h2>
           <p className="section-subheading">
-            From image to doorstep in three simple steps.
+            From STL file to doorstep in three simple steps.
           </p>
         </div>
 
@@ -66,7 +66,22 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="mt-14 text-center">
+        <div className="mt-10 text-center">
+          <p className="text-sm text-gray-500">
+            Only have a photo or drawing?{' '}
+            <a
+              href="https://studio.tripo3d.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-600 font-semibold hover:underline"
+            >
+              AI STL Generator
+            </a>{' '}
+            converts any image into a printable .stl file in minutes.
+          </p>
+        </div>
+
+        <div className="mt-8 text-center">
           <a href="#order" className="btn-primary">
             Place an Order
           </a>

@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="font-bold text-lg">layr3d</span>
             </div>
             <p className="text-sm text-gray-500 max-w-xs">
-              Custom 3D printing from any image you upload. Handcrafted, quality-checked, and shipped to you.
+              Custom 3D printing from your STL files. Handcrafted, quality-checked, and shipped to you.
             </p>
           </div>
 
